@@ -1,31 +1,32 @@
 using MongoDB.Bson.Serialization.Attributes;
+
 public class Inmueble {
     [BsonId]
     [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
 
     public string? id { get; set; }
 
-    [BsonElemnt("tipo")]
+    [BsonElement("tipo")]
     public string Tipo { get; set; } = string.Empty;
-    [BsonElemnt("operacion")]
+    [BsonElement("operacion")]
     public string Operacion { get; set; } = string.Empty;
-    [BsonElemnt("nombre_agente")]
+    [BsonElement("nombre_agente")]
     public string NombreAgente { get; set; } = string.Empty;
-    [BsonElemnt("baños")]
+    [BsonElement("baños")]
     public int Banos { get; set; }
-    [BsonElemnt("metros_terreno")]
+    [BsonElement("metros_terreno")]
     public int Metrosterreno  { get; set; }
-    [BsonElemnt("metros_construccion")]
+    [BsonElement("metros_construccion")]
     public int  MetrosContruccion { get; set; }
-    [BsonElemnt("tiene_patio")]
+    [BsonElement("tiene_patio")]
     public bool  TienePatio { get; set; }
-    [BsonElemnt("pisos")]
+    [BsonElement("pisos")]
     public int Pisos { get; set; }
-    [BsonElemnt("agencia")]
+    [BsonElement("agencia")]
     public string Agencia { get; set; } = string.Empty;
-    [BsonElemnt("fecha_publicacion")]
+    [BsonElement("fecha_publicacion")]
     public string  FechaPublicacion { get; set; } = string.Empty;
-    [BsonElemnt("costo")]
+    [BsonElement("costo")]
     public int Costo { get; set; }
 
 }

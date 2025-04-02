@@ -5,13 +5,29 @@ using MongoDB.Driver;
 [Route("api/eq")]
 public class EqController : Controller {
     [HttpGet("registro-agente")]
-    public IActionResult ListarAgencias(){
+    public IActionResult ListarAgencias(string agencia, string? agente){
         //Listar todos los registros de la agencia Torres Realty
         MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
         var db = client.GetDatabase("Inmuebles");
         var collection = db.GetCollection<Inmueble>("RentasVentas");
+        
+        //Que la gencia se de la inmobiliaria perez 
+        var filtroAgencia = Builders<Inmueble>.Filter.Eq(x=> x.Agencia, agencia);
 
-        var lista = collection.Find(FilterDefinition<Inmueble>.Empty).ToList();
-        return Ok(lista);
+        if(!string.IsNullOrWhiteSpace(agente)){
+            var filtroAgente = Builders<Inmueble>.Filter.Eq(x => x.NombreAgente,  agente);
+            var filtroCompuesto = Builders<Inmueble>.Filter.And(filtroAgencia, filtroAgente);
+            var lista = collection.Find(filtroCompuesto).ToList();
+
+            return Ok(lista);
+        }
+
+        else{
+            var lista = collection.Find(filtroAgencia).ToList();
+
+            return Ok(lista);
+
+        }
+        
     }
 }
