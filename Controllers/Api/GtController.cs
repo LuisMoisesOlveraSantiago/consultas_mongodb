@@ -20,4 +20,22 @@ public class GtController : Controller {
 
         return Ok(list);
     }
+
+    //1
+    [HttpGet("metros-terreno")]
+    public IActionResult MetrosTerrenos(){
+        MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
+        var db = client.GetDatabase("Inmuebles");
+        var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+        var filtro = Builders<Inmueble>.Filter.Gt(x => x.Metrosterreno, 500);
+        
+        var list = collection.Find(filtro).ToList();
+
+        return Ok(list);
+    }
+
+    //2
+    
+
 }

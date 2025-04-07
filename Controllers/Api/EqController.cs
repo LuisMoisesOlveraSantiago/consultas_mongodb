@@ -30,4 +30,61 @@ public class EqController : Controller {
         }
         
     }
+
+    //2
+    [HttpGet("registro-tipo")]
+    public IActionResult ListarTipos(){
+
+        MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
+        var db = client.GetDatabase("Inmuebles");
+        var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+        var filtro = Builders<Inmueble>.Filter.Eq(x=> x.Tipo, "Casa");
+        var lista = collection.Find(filtro).ToList();
+
+        return Ok(lista);
+    }
+
+    //3
+    [HttpGet("registro-operacion")]
+    public IActionResult ListarOperaciones(){
+
+        MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
+        var db = client.GetDatabase("Inmuebles");
+        var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+        var filtro = Builders<Inmueble>.Filter.Eq(x=> x.Operacion, "Renta");
+        var lista = collection.Find(filtro).ToList();
+
+        return Ok(lista);
+    }
+
+    //4
+    [HttpGet("registro-baños")]
+    public IActionResult ListarBanos(){
+
+        MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
+        var db = client.GetDatabase("Inmuebles");
+        var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+        var filtro = Builders<Inmueble>.Filter.Eq(x=> x.Banos, 2);
+        var lista = collection.Find(filtro).ToList();
+
+        return Ok(lista);
+    }
+
+    //5
+    [HttpGet("registro-pisos")]
+    public IActionResult ListarPisos(){
+
+        MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
+        var db = client.GetDatabase("Inmuebles");
+        var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+        var filtro = Builders<Inmueble>.Filter.Eq(x=> x.Pisos, 2);
+        var lista = collection.Find(filtro).ToList();
+
+        return Ok(lista);
+    }
+
 }
