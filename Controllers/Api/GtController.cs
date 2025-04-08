@@ -36,6 +36,58 @@ public class GtController : Controller {
     }
 
     //2
-    
+    [HttpGet("pisos")]
+    public IActionResult Pisos(){
+        MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
+        var db = client.GetDatabase("Inmuebles");
+        var collection = db.GetCollection<Inmueble>("RentasVentas");
 
+        var filtro = Builders<Inmueble>.Filter.Gt(x => x.Pisos, 2);
+        
+        var list = collection.Find(filtro).ToList();
+
+        return Ok(list);
+    }
+    //3
+    
+    [HttpGet("fecha-publicacion")]
+    public IActionResult FechaPublicacion(){
+        MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
+        var db = client.GetDatabase("Inmuebles");
+        var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+        var filtro = Builders<Inmueble>.Filter.Gt(x => x.FechaPublicacion, "2025-01-30");
+        
+        var list = collection.Find(filtro).ToList();
+
+        return Ok(list);
+    }
+
+    //4
+    [HttpGet("costo")]
+    public IActionResult Costo(){
+        MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
+        var db = client.GetDatabase("Inmuebles");
+        var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+        var filtro = Builders<Inmueble>.Filter.Gt(x => x.Costo, 100000);
+        
+        var list = collection.Find(filtro).ToList();
+
+        return Ok(list);
+    }
+
+    //5
+    [HttpGet("metros-construccion")]
+    public IActionResult MetrosContruccion(){
+        MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
+        var db = client.GetDatabase("Inmuebles");
+        var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+        var filtro = Builders<Inmueble>.Filter.Gt(x => x.MetrosContruccion, 200);
+        
+        var list = collection.Find(filtro).ToList();
+
+        return Ok(list);
+    }
 }
