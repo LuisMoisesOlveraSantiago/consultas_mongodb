@@ -56,7 +56,7 @@ public class LteController : Controller {
     }
 
     //5
-    [HttpGet("metros-construccion")]
+    [HttpGet("metros-contruccion")]
     public IActionResult MetroDeConstruccion(){
         MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
         var db = client.GetDatabase("Inmuebles");

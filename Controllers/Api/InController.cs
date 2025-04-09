@@ -74,7 +74,7 @@ public class InController : Controller{
     }
 
     //4
-    [HttpGet("metros-construccion")]
+    [HttpGet("metros-contruccion")]
     public IActionResult MetrosDeConstruccion(){
 
         MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
