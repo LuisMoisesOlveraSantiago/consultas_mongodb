@@ -59,4 +59,42 @@ public class NinController : Controller{
         return Ok(lista);
     }
 
+    //4
+    [HttpGet("nombre-agente")]
+    public IActionResult NombreDelAgente(){
+
+        MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
+        var db = client.GetDatabase("Inmuebles");
+        var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+        List<string> valores = new List<string>();
+        valores.Add("Juan Pérez");
+        valores.Add("Luis Fernández");
+        valores.Add("Ana Torres");
+
+        var filtro = Builders<Inmueble>.Filter.Nin(x => x.NombreAgente, valores);
+        var lista = collection.Find(filtro).ToList();
+
+        return Ok(lista);
+    }
+
+    //5
+        [HttpGet("metros-terreno")]
+    public IActionResult Metrosterreno(){
+
+        MongoClient client = new MongoClient(CadenasConexion.Mongo_DB);
+        var db = client.GetDatabase("Inmuebles");
+        var collection = db.GetCollection<Inmueble>("RentasVentas");
+
+        List<int> valores = new List<int>();
+        valores.Add(479);
+        valores.Add(904);
+        valores.Add(589);
+
+        var filtro = Builders<Inmueble>.Filter.Nin(x => x.Metrosterreno, valores);
+        var lista = collection.Find(filtro).ToList();
+
+        return Ok(lista);
+    }
+
 }
